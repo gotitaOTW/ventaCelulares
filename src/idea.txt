@@ -1,0 +1,39 @@
+venta celulares
+
+header{
+logo arriba izq.
+navbar{
+
+home: imagen enorme de modelo con celular y una frase enorme tipo Tu próximo celular está acá
+y subtitulo tipo: sellados de fábrica es y sin impuestos
+
+quienes somos: imagen profesional y texto
+
+productos: desplegable: ver todo, apple, Samsung, Xiaomi, Motorola, etc
+
+Contacto:
+¡Por cualquier duda! lista con datos, mail, numero, etc
+
+}}
+
+footer{
+copyright
+
+}
+
+productos-->catalogo: {
+búsqueda
+filtros: recomendados, mayor precio, menor precio, mayor fecha, menor fecha
+
+todos los celulares (con el filtro aplicado de productos)
+cada uno en una card con hover que se da vuelta y muestra una descripción y el botón de ver más que te lleva a detalleCelular
+}
+
+catalogo-->detalleCelular{
+imagen
+titulo
+descripción
+precio
+botón de comprar
+}
+
