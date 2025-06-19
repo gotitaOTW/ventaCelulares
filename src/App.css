@@ -1,3 +1,66 @@
+.filtroActivo{
+  margin:10px;
+}
+
+.cardCelu{
+  background-color: aliceblue;
+  margin: 10px;
+  padding:10px;
+  border-radius: 10px;
+}
+
+.main{
+  display: flex;
+  justify-content: center;
+}
+.catalogo{
+  width:80%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.cont-catalogo{
+  display: flex;
+  justify-content: center;
+}
+
+.formBuscarCelular{
+  /* background-color: #969af0; */
+  display: flex;
+  align-items: center;
+  margin:10px;
+}
+
+.buscadores{
+  display: flex;
+  justify-content: end;
+  width: 80%;
+  /* background-color: rgb(127, 197, 255); */
+}
+
+.imagenSubmitBuscarCelular{
+  width:20px;
+}
+
+.filtros{
+  /*background-color: bisque;*/
+  display: flex;
+  align-items: center;
+}
+
+.inputBuscarCelular{
+  border: transparent;
+  border-radius: 8px;
+  padding: 10px;
+
+}.submitBuscarCelular{
+  background-color: transparent;
+  border: transparent;
+}
+
+.submitBuscarCelular:hover{
+  cursor:pointer;
+}
+
 .dropdown {
   position:relative;
   display: inline-block;
