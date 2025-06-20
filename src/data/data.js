@@ -462,7 +462,7 @@ export const celulares = [
     {
       id: 20,
       marcaId: 4,
-      modelo: "Moto Razr 2022",
+      modelo: "Moto 2022",
       descripcion: "Diseño plegable clásico.",
       descripcionLarga: `El Moto Razr 2022 renace con diseño plegable tipo concha.
   Cuenta con pantalla OLED flexible y cámara principal de 50 MP.`,

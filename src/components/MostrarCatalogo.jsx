@@ -3,7 +3,7 @@ const MostrarCatalogo = (props) =>{
         <>
         <div className="catalogo">
             {props.catalogo.map((celu,index)=>(
-                <div className="cardCelu" hey={index}>
+                <div className="cardCelu" key={index}>
                     <img src={celu.fotos[0]} alt={celu.fotos[0]} className="fotoCelu"></img>
                     <div className="datos">
                         <div className="principales">

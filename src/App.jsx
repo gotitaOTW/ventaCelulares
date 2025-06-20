@@ -29,6 +29,7 @@ function App() {
         {/* en Home tiene que aparecer un botón con ver catálogo y que te lleve directo*/}
         <Route path='/catalogo/:marcaId' element={<Catalogo/>}></Route> {/*en filtros hay checkboxes de marca y precio (ver idea catalogo). el parametro sirve para seleccionar uno*/}
         <Route path='/catalogo/:id' element={<Celular/>}></Route> {/*muestra carousel de foto en grande y sus datos con botón de comprar*/}
+        <Route path='/catalogo/*' element={<h1>Marca desconocida!</h1>}></Route> {/*muestra carousel de foto en grande y sus datos con botón de comprar*/}
         <Route path='/contacto' element={<Contacto/>}></Route>
         <Route path='/quienes-somos' element={<QuienesSomos/>}></Route>
 

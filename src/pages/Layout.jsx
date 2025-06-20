@@ -1,5 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 import logo from '../assets/img/logo.png';
+import {marcas} from '../data/data.js';
 
 const Layout = () =>{
     
@@ -13,8 +14,12 @@ const Layout = () =>{
                         <div className="dropdown-content">
                             <ul>
                                 <li><Link to="/catalogo/0">Ver todos</Link></li>
-                                <li><Link to="/catalogo/1">Apple</Link></li>
-                                <li><Link to="/catalogo/2">Samsung</Link></li>
+                                {
+                                marcas.map((marca) => (
+                                    <li key={marca.id}>
+                                        <Link to={`/catalogo/${marca.id}`}>{marca.nombre}</Link>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                     </div>
