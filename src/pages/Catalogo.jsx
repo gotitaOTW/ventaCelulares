@@ -8,26 +8,39 @@ import { Link, useParams } from "react-router-dom";
 const Catalogo = () =>{
     let {marcaId}=(useParams());
     marcaId=parseInt(marcaId);
-    console.log(marcaId);
-    const [filtrosActivados,setFiltroActivados]=useState(marcaId === 0 ? [] : [marcas[marcaId-1].nombre]);  
-
+    const [filtrosActivados,setFiltroActivados]=useState(marcaId === 0 ? [] : [marcas[marcaId-1]]);
+    const [celusFiltrados,setCelusFiltrados]=useState(celulares);
+    //const [busqueda,setBusqueda]=useState("");
     
 
-    function activarFiltro(tildado, nombre){
+    function activarFiltro(tildado, marca){
         if(tildado){
-            setFiltroActivados([...filtrosActivados, nombre]);
+            setFiltroActivados([...filtrosActivados, marca]);
+            
         }
-        else{borrarFiltro(nombre)}
+        else{borrarFiltro(marca)}
     }
 
-    const borrarFiltro=(nombre)=>{
-        const filtrosActualizados=filtrosActivados.filter(nombreFiltro=>nombreFiltro != nombre);
+    const borrarFiltro=(marca)=>{
+        const filtrosActualizados=filtrosActivados.filter(filtro=>filtro != marca);
         setFiltroActivados(filtrosActualizados);
     }
 
     useEffect(() => {
-        console.log("Filtros actualizados:", filtrosActivados);
-    }, [filtrosActivados]);
+        filtrarArray();
+    }, [filtrosActivados]); 
+
+    const filtrarArray=()=>{
+        if(filtrosActivados.length>0){
+           const idsMarca=filtrosActivados.map(marca=>marca.id);
+           const celularesFiltrados=celulares.filter(celu=>idsMarca.includes(celu.marcaId));
+           setCelusFiltrados(celularesFiltrados); 
+        }
+        else{
+           setCelusFiltrados(celulares); 
+        }
+        
+    }
     
     return(
         <>
@@ -35,7 +48,7 @@ const Catalogo = () =>{
             <div className="filtros">
                 {marcas.map((marca) => (
                     <label className="labelFiltro" key={marca.id}>
-                       <input type="checkbox" onChange={(event)=>{activarFiltro(event.target.checked, marca.nombre)}}
+                       <input type="checkbox" onChange={(event)=>{activarFiltro(event.target.checked, marca)}}
                         className="cbFiltroMarca" hidden/>
                        {marca.nombre} 
                     </label>
@@ -51,7 +64,7 @@ const Catalogo = () =>{
         </div>
 
         <div className="cont-catalogo">
-           <MostrarCatalogo catalogo={celulares}/> 
+           <MostrarCatalogo catalogo={celusFiltrados}/> 
         </div>
         
         

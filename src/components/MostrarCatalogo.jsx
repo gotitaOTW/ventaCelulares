@@ -1,3 +1,4 @@
+
 const MostrarCatalogo = (props) =>{
     return(
         <>
@@ -7,6 +8,7 @@ const MostrarCatalogo = (props) =>{
                     <img src={celu.fotos[0]} alt={celu.fotos[0]} className="fotoCelu"></img>
                     <div className="datos">
                         <div className="principales">
+                            <h4>Marca: {celu.marcaId}</h4>
                             <p className="titulo">{celu.modelo}</p>
                             <p className="precio">{celu.precio}</p>
                         </div>

@@ -7,7 +7,6 @@ mejor forma de hacerlo, el objetivo de eso, etc.
 
 */}
 
-import { useState } from 'react'
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import './App.css'
 import Layout from './pages/Layout';
@@ -18,7 +17,6 @@ import QuienesSomos from './pages/QuienesSomos';
 
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
