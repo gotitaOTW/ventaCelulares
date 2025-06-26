@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { use, useEffect, useState } from "react"
 import {celulares} from '../data/data.js';
 import {marcas} from '../data/data.js';
 import lupa from '../assets/icons/lupa.png';
@@ -8,56 +8,80 @@ import { Link, useParams } from "react-router-dom";
 const Catalogo = () =>{
     let {marcaId}=(useParams());
     marcaId=parseInt(marcaId);
-    const [filtrosActivados,setFiltroActivados]=useState(marcaId === 0 ? [] : [marcas[marcaId-1]]);
+    const [filtrosPorMarca,setFiltrosPorMarca]=useState(marcaId === 0 ? [] : [marcas[marcaId-1]]);
     const [celusFiltrados,setCelusFiltrados]=useState(celulares);
-    //const [busqueda,setBusqueda]=useState("");
+    const [FiltroBusqueda,setFiltroBusqueda]=useState("");
+    const [filtroOrden,setFiltroOrden]=useState("fechaDesc");
+    const filtrosDeOrden=[
+        {id:'fechaDesc', nombre:'Más reciente'},
+        {id:'fechaAsc', nombre:'Más antiguo'},
+        {id:'precioAsc', nombre:'Menor precio'},
+        {id:'precioDesc', nombre:'Mayor precio'},
+    ]
     
-
-    function activarFiltro(tildado, marca){
-        if(tildado){
-            setFiltroActivados([...filtrosActivados, marca]);
-            
-        }
-        else{borrarFiltro(marca)}
+    const activarFiltroBusqueda=(busq)=>{
+        setFiltroBusqueda(busq);
     }
 
-    const borrarFiltro=(marca)=>{
-        const filtrosActualizados=filtrosActivados.filter(filtro=>filtro != marca);
-        setFiltroActivados(filtrosActualizados);
+    function activarFiltroPorMarca(tildado, marca){
+        if(tildado){
+            setFiltrosPorMarca([...filtrosPorMarca, marca]);
+            
+        }
+        else{borrarFiltroPorMarca(marca)}
+    }
+
+    const borrarFiltroPorMarca=(marca)=>{
+        const filtrosActualizados=filtrosPorMarca.filter(filtro=>filtro != marca);
+        setFiltrosPorMarca(filtrosActualizados);
     }
 
     useEffect(() => {
         filtrarArray();
-    }, [filtrosActivados]); 
+    }, [filtrosPorMarca,FiltroBusqueda]); 
 
     const filtrarArray=()=>{
-        if(filtrosActivados.length>0){
-           const idsMarca=filtrosActivados.map(marca=>marca.id);
-           const celularesFiltrados=celulares.filter(celu=>idsMarca.includes(celu.marcaId));
-           setCelusFiltrados(celularesFiltrados); 
+        let celularesFiltrados=celulares;
+        if(filtrosPorMarca.length>0){
+           const idsMarca=filtrosPorMarca.map(marca=>marca.id);
+           celularesFiltrados=celulares.filter(celu=>idsMarca.includes(celu.marcaId));
         }
-        else{
-           setCelusFiltrados(celulares); 
+        if(FiltroBusqueda!=""){
+            console.log(celularesFiltrados);//<-- vacio, no se entiende por qué
+            celularesFiltrados=celularesFiltrados.filter(celu=>{return celu.modelo.toLocaleLowerCase().includes(FiltroBusqueda.toLocaleLowerCase())});
         }
-        
+        setCelusFiltrados(celularesFiltrados);
     }
     
+    const comparadores={
+        fechaAsc:(a,b)=>a.fechaLanzamiento-b.fechaLanzamiento,
+        fechaDesc:(a,b)=>b.fechaLanzamiento-a.fechaLanzamiento,
+        precioAsc:(a,b)=>a.precio-b.precio,
+        precioDesc:(a,b)=>b.precio-a.precio
+    }
+
     return(
         <>
         <div className="buscadores">
             <div className="filtros">
                 {marcas.map((marca) => (
                     <label className="labelFiltro" key={marca.id}>
-                       <input type="checkbox" onChange={(event)=>{activarFiltro(event.target.checked, marca)}}
+                       <input type="checkbox" onChange={(event)=>{activarFiltroPorMarca(event.target.checked, marca)}}
                         className="cbFiltroMarca" hidden/>
                        {marca.nombre} 
                     </label>
                 ))}
             </div> 
 
+            <select onChange={e => setFiltroOrden(e.target.value)}>
+                {filtrosDeOrden.map(opt => (
+                    <option key={opt.id}>{opt.nombre}</option>
+                ))}
+            </select>
+
             <form className="formBuscarCelular">
-                <input type="text" className="inputBuscarCelular"/>
-                <button type="submit" className="submitBuscarCelular">
+                <input type="text" className="inputBuscarCelular" onChange={(event)=>activarFiltroBusqueda(event.target.value)}/>
+                <button type="button" className="submitBuscarCelular">
                     <img src={lupa} className="imagenSubmitBuscarCelular"/>
                 </button>  
             </form>
