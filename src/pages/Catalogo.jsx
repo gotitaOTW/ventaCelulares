@@ -12,12 +12,13 @@ const Catalogo = () =>{
     const [celusFiltrados,setCelusFiltrados]=useState(celulares);
     const [FiltroBusqueda,setFiltroBusqueda]=useState("");
     const [filtroOrden,setFiltroOrden]=useState("fechaDesc");
-    const filtrosDeOrden=[
-        {id:'fechaDesc', nombre:'Más reciente'},
-        {id:'fechaAsc', nombre:'Más antiguo'},
-        {id:'precioAsc', nombre:'Menor precio'},
-        {id:'precioDesc', nombre:'Mayor precio'},
-    ]
+    const filtrosDeOrden = [
+        { id: 'fechaDesc', nombre: 'Más reciente' },
+        { id: 'fechaAsc', nombre: 'Más antiguo' },
+        { id: 'precioAsc', nombre: 'Menor precio' },
+        { id: 'precioDesc', nombre: 'Mayor precio' },
+        { id: 'recomendado', nombre: 'Recomendado' }
+      ];
     
     const activarFiltroBusqueda=(busq)=>{
         setFiltroBusqueda(busq);
@@ -38,7 +39,7 @@ const Catalogo = () =>{
 
     useEffect(() => {
         filtrarArray();
-    }, [filtrosPorMarca,FiltroBusqueda]); 
+    }, [filtrosPorMarca,FiltroBusqueda,filtroOrden]); 
 
     const filtrarArray=()=>{
         let celularesFiltrados=celulares;
@@ -47,18 +48,24 @@ const Catalogo = () =>{
            celularesFiltrados=celulares.filter(celu=>idsMarca.includes(celu.marcaId));
         }
         if(FiltroBusqueda!=""){
-            console.log(celularesFiltrados);//<-- vacio, no se entiende por qué
+            console.log(celularesFiltrados);
             celularesFiltrados=celularesFiltrados.filter(celu=>{return celu.modelo.toLocaleLowerCase().includes(FiltroBusqueda.toLocaleLowerCase())});
         }
+        if (comparadores[filtroOrden]) {
+            celularesFiltrados = [...celularesFiltrados].sort(comparadores[filtroOrden]);
+          }
         setCelusFiltrados(celularesFiltrados);
     }
     
-    const comparadores={
-        fechaAsc:(a,b)=>a.fechaLanzamiento-b.fechaLanzamiento,
-        fechaDesc:(a,b)=>b.fechaLanzamiento-a.fechaLanzamiento,
-        precioAsc:(a,b)=>a.precio-b.precio,
-        precioDesc:(a,b)=>b.precio-a.precio
-    }
+    const comparadores = {
+        fechaAsc:      (a, b) => a.fechaLanzamiento - b.fechaLanzamiento,
+        fechaDesc:     (a, b) => b.fechaLanzamiento - a.fechaLanzamiento,
+        precioAsc:     (a, b) => a.precio - b.precio,
+        precioDesc:    (a, b) => b.precio - a.precio,
+        recomendado:   (a, b) => (b.esRecomendado === a.esRecomendado)
+          ? 0
+          : b.esRecomendado ? 1 : -1
+      };
 
     return(
         <>
@@ -75,7 +82,7 @@ const Catalogo = () =>{
 
             <select onChange={e => setFiltroOrden(e.target.value)}>
                 {filtrosDeOrden.map(opt => (
-                    <option key={opt.id}>{opt.nombre}</option>
+                    <option key={opt.id} value={opt.id}>{opt.nombre}</option>
                 ))}
             </select>
 

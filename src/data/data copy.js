@@ -1,8 +1,8 @@
-const img = import.meta.glob('../assets/img/*.jpg', { eager: true, import: 'default' });
 export const marcas = [
   { id: 1, nombre: 'Apple' },
   { id: 2, nombre: 'Samsung' },
-  { id: 3, nombre: 'Xiaomi' }
+  { id: 3, nombre: 'Xiaomi' },
+  { id: 4, nombre: 'Motorola' }
 ];
 
 export const celulares = [
@@ -15,7 +15,7 @@ export const celulares = [
 Cuenta con una pantalla Super Retina XDR de 6.1 pulgadas, ideal para ver contenido en alta definición.
 Su sistema de doble cámara permite capturar fotos y videos con gran detalle, incluso en condiciones de poca luz.`,
     precio: 999,
-    fotos: [img["../assets/img/iph13.jpg"], "imagen2", "imagen3"],
+    fotos: ["imagen1", "imagen2", "imagen3"],
     esRecomendado: true,
     especificaciones: [
       { nombre: "Pantalla", texto: "6.1 pulgadas Super Retina XDR" },
@@ -91,7 +91,7 @@ Cuenta con el chip A14 Bionic y cámara dual para fotos de calidad.`,
     descripcionLarga: `El iPhone 15 Pro Max redefine el diseño con un cuerpo de titanio más liviano.
   Incluye una cámara con zoom periscópico y mejoras en rendimiento y batería.`,
     precio: 1399,
-    fotos: [img['../assets/img/iph15promax.jpg'], "imagen2", "imagen3"],
+    fotos: ["imagen1", "imagen2", "imagen3"],
     esRecomendado: true,
     fechaLanzamiento: new Date("2023-09-22"),
     especificaciones: [
