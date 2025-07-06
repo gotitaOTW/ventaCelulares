@@ -1,0 +1,11 @@
+6/5
+
+catalogo anda perfecto (falta poner imagenes en cada celu)
+y detalle celular tambien
+entonces quería registrar quien compra --> login
+para eso necesitaba una variable global --> hook: useContext()
+ya lo implementé y funciona perfecto, arranca en null y puede ser leído y reescrito desde cualquier page o componente
+ahora solo falta:
+- hacer esa pestaña login (definir objeto user), cuando crea usuario se guarda en lista y logea con ese
+si inicia sesion se logea si la contraseña es correcta.
+- a partir de eso ya puede comprar, si clickea comprar (en detalleCelular) y no esta logeado se redirige a la pestaña para hacerlo

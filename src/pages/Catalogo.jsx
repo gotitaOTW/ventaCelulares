@@ -1,13 +1,19 @@
-import React, { use, useEffect, useState } from "react"
+import React, { use, useEffect, useState, useContext } from "react"
 import {celulares} from '../data/data.js';
 import {marcas} from '../data/data.js';
 import lupa from '../assets/icons/lupa.png';
 import MostrarCatalogo from "../components/MostrarCatalogo.jsx";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
+// import { UserContext } from '../contextos/UserContext.jsx';
+// const { usuario, setUsuario } = useContext(UserContext);
 
-const Catalogo = () =>{
-    let {marcaId}=(useParams());
-    marcaId=parseInt(marcaId);
+const Catalogo = () =>{ 
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const nombreMarca = queryParams.get('marca');
+    const marca=marcas.find(m=>m.nombre.toLocaleLowerCase()==nombreMarca.toLocaleLowerCase());
+    const marcaId=marca.id;
+    console.log(marca);
     const [filtrosPorMarca,setFiltrosPorMarca]=useState(marcaId === 0 ? [] : [marcas[marcaId-1]]);
     const [celusFiltrados,setCelusFiltrados]=useState(celulares);
     const [FiltroBusqueda,setFiltroBusqueda]=useState("");
@@ -69,6 +75,7 @@ const Catalogo = () =>{
 
     return(
         <>
+        <h1>Hola {usuario.nombre}, tenés {usuario.edad} años!</h1>
         <div className="buscadores">
             <div className="filtros">
                 {marcas.map((marca) => (

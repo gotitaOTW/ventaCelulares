@@ -17,7 +17,7 @@ const Layout = () =>{
                                 {
                                 marcas.map((marca) => (
                                     <li key={marca.id}>
-                                        <Link to={`/catalogo/${marca.id}`}>{marca.nombre}</Link>
+                                        <Link to={`/catalogo?marca=${marca.nombre}`}>{marca.nombre}</Link>
                                     </li>
                                 ))}
                             </ul>

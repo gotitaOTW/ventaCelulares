@@ -1,5 +1,5 @@
 import React from "react";
-import Link from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 const MostrarCatalogo = (props) => {
   return (
@@ -22,7 +22,7 @@ const MostrarCatalogo = (props) => {
               <p className="descripcionLarga">{celu.descripcionLarga}</p>
               <Link to={`/catalogo/${celu.id}`}>
                     <button className="botonVerMas" type="button">Ver más</button>
-            </Link>
+              </Link>
             </div>
           </div>
         </div>
