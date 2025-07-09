@@ -14,24 +14,39 @@ import Celular from './pages/Celular';
 import Contacto from './pages/Contacto';
 import Catalogo from './pages/Catalogo';
 import QuienesSomos from './pages/QuienesSomos';
+import Home from './pages/Home';
 import { UserProvider } from './contextos/UserContext';
-
+import CrearCuenta from './pages/CrearCuenta';
+import IniciarSesion from './pages/IniciarSesion';
+import { useContext } from "react";
+import { UserContext } from "./contextos/UserContext";
+import Admin from './pages/Admin';
+import Perfil from './pages/Perfil';  
+import Comprar from './pages/Comprar';
+import Confirmacion from './pages/Confirmacion';
 
 function App() {
+  const { usuario } = useContext(UserContext);
 
   return (
     <>
     <UserProvider>
       <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Layout/>}> {/*layout tiene que mostrar el componente home*/}
+        <Route path='/' element={<Layout/>}>
 
-        {/* en Home tiene que aparecer un botón con ver catálogo y que te lleve directo*/}
-        <Route path='/catalogo' element={<Catalogo/>}></Route> {/*en filtros hay checkboxes de marca y precio (ver idea catalogo). el parametro sirve para seleccionar uno*/}
-        <Route path='/catalogo/:idCelu' element={<Celular/>}></Route> {/*muestra carousel de foto en grande y sus datos con botón de comprar*/}
-        <Route path='/catalogo/*' element={<h1>Marca desconocida!</h1>}></Route> {/*muestra carousel de foto en grande y sus datos con botón de comprar*/}
-        <Route path='/contacto' element={<Contacto/>}></Route>
-        <Route path='/quienes-somos' element={<QuienesSomos/>}></Route>
+          <Route index element={<Home />}></Route>
+          <Route path='/catalogo' element={<Catalogo/>}></Route>
+          <Route path='/catalogo/:idCelu' element={<Celular/>}></Route>
+          <Route path='/catalogo/*' element={<h1>Marca desconocida!</h1>}></Route>
+          <Route path='/contacto' element={<Contacto/>}></Route>
+          <Route path='/quienes-somos' element={<QuienesSomos/>}></Route>
+          <Route path='/CrearCuenta' element={<CrearCuenta/>}></Route>
+          <Route path='/IniciarSesion' element={<IniciarSesion/>}></Route>
+          <Route path='/perfil' element={<Perfil/>}></Route>
+          <Route path='/confirmacion/:idCelu' element={<Confirmacion/>}></Route>
+          <Route path='/comprar/:idCelu' element={<Comprar/>}></Route>
+          <Route path='/admin' element={<Admin />} />
 
 
         </Route>

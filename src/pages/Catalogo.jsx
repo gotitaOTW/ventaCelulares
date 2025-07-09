@@ -4,17 +4,20 @@ import {marcas} from '../data/data.js';
 import lupa from '../assets/icons/lupa.png';
 import MostrarCatalogo from "../components/MostrarCatalogo.jsx";
 import { Link, useParams, useLocation } from "react-router-dom";
-// import { UserContext } from '../contextos/UserContext.jsx';
-// const { usuario, setUsuario } = useContext(UserContext);
+import '../estilos/Catalogo.css';
 
 const Catalogo = () =>{ 
     const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
-    const nombreMarca = queryParams.get('marca');
-    const marca=marcas.find(m=>m.nombre.toLocaleLowerCase()==nombreMarca.toLocaleLowerCase());
-    const marcaId=marca.id;
-    console.log(marca);
-    const [filtrosPorMarca,setFiltrosPorMarca]=useState(marcaId === 0 ? [] : [marcas[marcaId-1]]);
+  const queryParams = new URLSearchParams(location.search);
+  const nombreMarca = queryParams.get('marca');
+
+  const marcaEncontrada = nombreMarca
+    ? marcas.find(m => m.nombre.toLowerCase() === nombreMarca.toLowerCase())
+    : null;
+  const marcaId = marcaEncontrada ? marcaEncontrada.id : null;
+  const [filtrosPorMarca, setFiltrosPorMarca] = useState(
+    marcaId ? [marcaEncontrada] : []
+  );
     const [celusFiltrados,setCelusFiltrados]=useState(celulares);
     const [FiltroBusqueda,setFiltroBusqueda]=useState("");
     const [filtroOrden,setFiltroOrden]=useState("fechaDesc");
@@ -47,6 +50,14 @@ const Catalogo = () =>{
         filtrarArray();
     }, [filtrosPorMarca,FiltroBusqueda,filtroOrden]); 
 
+    useEffect(() => {
+        if (marcaId) {
+          setCelusFiltrados(celulares.filter(c => c.marcaId === marcaId));
+        } else {
+          setCelusFiltrados(celulares);
+        }
+      }, [marcaId]);
+
     const filtrarArray=()=>{
         let celularesFiltrados=celulares;
         if(filtrosPorMarca.length>0){
@@ -75,17 +86,24 @@ const Catalogo = () =>{
 
     return(
         <>
-        <h1>Hola {usuario.nombre}, tenés {usuario.edad} años!</h1>
         <div className="buscadores">
-            <div className="filtros">
-                {marcas.map((marca) => (
-                    <label className="labelFiltro" key={marca.id}>
-                       <input type="checkbox" onChange={(event)=>{activarFiltroPorMarca(event.target.checked, marca)}}
-                        className="cbFiltroMarca" hidden/>
-                       {marca.nombre} 
-                    </label>
-                ))}
-            </div> 
+        <div className="filtros">
+            {marcas.map((marca) => (
+                <div key={marca.id} className="filtro-opcion">
+                <input
+                    type="checkbox"
+                    id={`marca-${marca.id}`}
+                    onChange={(event) =>
+                    activarFiltroPorMarca(event.target.checked, marca)
+                    }
+                    className="cbFiltroMarca"
+                />
+                <label htmlFor={`marca-${marca.id}`} className="labelFiltro">
+                    {marca.nombre}
+                </label>
+                </div>
+            ))}
+            </div>
 
             <select onChange={e => setFiltroOrden(e.target.value)}>
                 {filtrosDeOrden.map(opt => (

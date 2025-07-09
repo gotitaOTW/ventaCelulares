@@ -1,0 +1,98 @@
+:root {
+  --color-base: #1c1c1c;
+  --color-resalte: #535bf2;
+  --color-resalte-hover: #3a42c5;
+  --bg-light: #f9f9f9;
+  --border-radius: 10px;
+  --shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.celular-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  max-width: 900px;
+  margin: 3rem auto;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  padding: 20px;
+}
+
+@media (min-width: 768px) {
+  .celular-container {
+    flex-direction: row;
+  }
+}
+
+.celular-carousel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-light);
+  border-radius: var(--border-radius);
+}
+
+.celular-imagen {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  object-fit: contain;
+  padding: 20px;
+}
+
+.celular-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.celular-modelo {
+  font-size: 2rem;
+  margin: 0;
+  color: var(--color-base);
+}
+
+.celular-precio {
+  font-size: 1.4rem;
+  color: #555;
+  margin: 0;
+}
+
+.celular-especificaciones {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.especificacion-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.especificacion-icono {
+  font-size: 1.5rem;
+}
+
+.boton-comprar {
+  padding: 12px 20px;
+  background-color: var(--color-resalte);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background-color 0.3s ease;
+}
+
+.boton-comprar:hover {
+  background-color: var(--color-resalte-hover);
+}

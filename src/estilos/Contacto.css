@@ -1,0 +1,54 @@
+:root {
+  --color-base: #1c1c1c;
+  --color-resalte: #535bf2;
+  --border-radius: 12px;
+  --shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.contacto-container {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.contacto-container h2 {
+  color: var(--color-base);
+  margin-bottom: 1rem;
+}
+
+.contacto-container p {
+  color: #555;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.info-contacto {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.item-contacto {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 1rem;
+  background-color: #f8f8f8;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+.item-contacto span {
+  font-size: 1.5rem;
+}
+
+.item-contacto p {
+  margin: 0;
+  text-align: left;
+  color: #333;
+}
