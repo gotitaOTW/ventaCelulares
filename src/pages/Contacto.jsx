@@ -13,7 +13,7 @@ const Contacto = () => {
         </div>
         <div className="item-contacto">
           <span>📞</span>
-          <p><strong>Teléfono:</strong> +54 11 5555-1234</p>
+          <p><strong>Teléfono:</strong> +54 11 1101-1001</p>
         </div>
         <div className="item-contacto">
           <span>📍</span>
@@ -21,7 +21,7 @@ const Contacto = () => {
         </div>
         <div className="item-contacto">
           <span>⏰</span>
-          <p><strong>Horario de atención:</strong> Todos los días de 09 a 09:30 hs</p>
+          <p><strong>Horario de atención:</strong>Todos los días de 07:45 a 08 hs</p>
         </div>
       </div>
     </div>

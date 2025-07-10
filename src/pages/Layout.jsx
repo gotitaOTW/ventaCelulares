@@ -42,7 +42,7 @@ const Layout = () =>{
             </header>
             <Outlet />
             <footer>
-                <p>&copy; {new Date().getFullYear()} VentaCelulares. Todos los derechos reservados.</p>
+                <p>&copy; {new Date().getFullYear()} García Salmaso. Todos los derechos reservados.</p>
             </footer>
         </>
     )
