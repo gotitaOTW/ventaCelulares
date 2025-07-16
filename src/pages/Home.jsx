@@ -17,7 +17,7 @@ const Home = () => {
         <p className="subtitulo-bienvenida">¿Qué estás buscando hoy?</p>
         <Link to="/catalogo">
             <button className="botonCatalogo">Ver catálogo</button>
-            </Link>
+        </Link>
       </div>
    </div>
     );
